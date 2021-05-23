@@ -1,5 +1,37 @@
 #include "StringCls.h"
 
+// default constructor
+StringCls::StringCls() : m_str(nullptr), m_strLen(0) {}
+
+// destructor
+StringCls::~StringCls() { delete m_str; }
+
+// c-string constructor
+StringCls::StringCls(const char *other)
+{
+    m_strLen = 0;
+    while (other != nullptr && *other != '\0')
+    {
+        ++m_strLen;
+        ++other;
+    }
+
+    m_str = new char[m_strLen + 1];
+    m_str[m_strLen] = '\0';
+    for (int i = m_strLen - 1; i >= 0; --i)
+    {
+        --other;
+        m_str[i] = *other;
+    }
+}
+
+// output stream operator
+std::ostream &operator<<(std::ostream &output, const StringCls &other)
+{
+    output << other.m_str;
+    return output;
+}
+
 // equal operator
 bool StringCls::operator==(const StringCls &other)
 {

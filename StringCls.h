@@ -1,6 +1,8 @@
 #ifndef STRING_CLS_H
 #define STRING_CLS_H
 
+#include <iostream>
+
 class StringCls
 {
 private:
@@ -19,12 +21,16 @@ public:
 
     // operators
 
-    // comparison operators
+    // output stream operator
+    friend std::ostream &operator<<(std::ostream &output, const StringCls &other);
+
+    // comparison operator
     bool operator==(const StringCls &other);
 
     // conversion operators
 
     // utility methods
+    void Print();
 
     // find and replace methods
 
