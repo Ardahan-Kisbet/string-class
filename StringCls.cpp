@@ -4,7 +4,7 @@
 StringCls::StringCls() : m_str(nullptr), m_strLen(0) {}
 
 // destructor
-StringCls::~StringCls() { delete m_str; }
+StringCls::~StringCls() { delete[] m_str; }
 
 // c-string constructor
 StringCls::StringCls(const char *other)
@@ -23,6 +23,23 @@ StringCls::StringCls(const char *other)
         --other;
         m_str[i] = *other;
     }
+}
+
+// copy constructor
+StringCls::StringCls(const StringCls &other)
+{
+    if (other.m_strLen != this->m_strLen)
+    {
+        // reset this
+        delete[] this->m_str;
+        this->m_str = new char[other.m_strLen];
+    }
+
+    for (size_t i = 0; i < other.m_strLen; ++i)
+    {
+        this->m_str[i] = other.m_str[i];
+    }
+    this->m_strLen = other.m_strLen;
 }
 
 // output stream operator
