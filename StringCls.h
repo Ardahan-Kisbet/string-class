@@ -30,7 +30,6 @@ public:
     // conversion operators
 
     // utility methods
-    void Print();
 
     // find and replace methods
 

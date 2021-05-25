@@ -42,6 +42,15 @@ StringCls::StringCls(const StringCls &other)
     this->m_strLen = other.m_strLen;
 }
 
+// move constructor
+StringCls::StringCls(StringCls &&other) noexcept
+{
+    this->m_str = other.m_str;
+    this->m_strLen = other.m_strLen;
+    other.m_str = nullptr;
+    other.m_strLen = 0;
+}
+
 // output stream operator
 std::ostream &operator<<(std::ostream &output, const StringCls &other)
 {
