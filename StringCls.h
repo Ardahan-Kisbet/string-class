@@ -12,6 +12,7 @@ private:
 public:
     // constructors
     StringCls();                           // default constructor
+    StringCls(size_t length);              // given length constructor
     StringCls(const char *other);          // c-string constructor
     StringCls(const StringCls &other);     // copy constructor
     StringCls(StringCls &&other) noexcept; // move constructor
@@ -30,10 +31,15 @@ public:
     // conversion operators
 
     // utility methods
+    // comparison method
+    int compare(const StringCls& other);
 
     // find and replace methods
 
     // split methods
+    // substring
+    StringCls substr(size_t pos, size_t len);
+
 };
 
 #endif

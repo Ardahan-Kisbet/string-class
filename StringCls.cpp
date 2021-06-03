@@ -25,9 +25,18 @@ StringCls::StringCls(const char *other)
     }
 }
 
+// given length constructor
+StringCls::StringCls(size_t length)
+{
+    this->m_str = new char[length + 1] {};
+    this->m_strLen = length + 1;
+    this->m_str[length] = '\0';
+}
+
 // copy constructor
 StringCls::StringCls(const StringCls &other)
 {
+    std::cout<< "copy ctor called"<< std::endl;
     if (other.m_strLen != this->m_strLen)
     {
         // reset this
@@ -45,6 +54,7 @@ StringCls::StringCls(const StringCls &other)
 // move constructor
 StringCls::StringCls(StringCls &&other) noexcept
 {
+    std::cout<< "move ctor called"<< std::endl;
     this->m_str = other.m_str;
     this->m_strLen = other.m_strLen;
     other.m_str = nullptr;
@@ -73,4 +83,27 @@ bool StringCls::operator==(const StringCls &other)
     }
 
     return true;
+}
+
+// comparison method
+int StringCls::compare(const StringCls& other)
+{
+    int res;
+
+    // TODO
+
+    // three way output = , < , >
+    return res;
+}
+
+// substring method
+StringCls StringCls::substr(size_t pos, size_t len)
+{
+    StringCls temp(len);
+    for(size_t i = 0; i < len; ++i)
+    {
+        temp.m_str[i] = this->m_str[pos + i];
+    }
+
+    return temp;
 }
