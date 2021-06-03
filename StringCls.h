@@ -19,8 +19,14 @@ public:
     ~StringCls();                          // destructor
 
     // data management
+    void swap(StringCls& lhs, StringCls& rhs);
 
     // operators
+    // assignment operator
+    StringCls& operator=(const StringCls& other);
+
+    // move assignment operator
+    StringCls& operator=(StringCls&& other);
 
     // output stream operator
     friend std::ostream &operator<<(std::ostream &output, const StringCls &other);

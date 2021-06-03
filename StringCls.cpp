@@ -61,6 +61,31 @@ StringCls::StringCls(StringCls &&other) noexcept
     other.m_strLen = 0;
 }
 
+// assignment operator
+StringCls& StringCls::operator=(const StringCls& other)
+{
+    std::cout<<"assignment operator is called"<< std::endl;
+    // to get rid of constant value
+    StringCls temp(other);
+    StringCls::swap(*this, temp);
+
+    return *this;
+}
+
+// move assignment operator
+StringCls& StringCls::operator=(StringCls&& other)
+{
+    std::cout<<"move assignment operator is called"<< std::endl;
+    //TODO
+    return *this;
+}
+
+// swap two strings
+void StringCls::swap(StringCls& lhs, StringCls& rhs)
+{
+    // TODO
+}
+
 // output stream operator
 std::ostream &operator<<(std::ostream &output, const StringCls &other)
 {
