@@ -9,6 +9,7 @@ StringCls::~StringCls() { delete[] m_str; }
 // c-string constructor
 StringCls::StringCls(const char *other)
 {
+    std::cout << "c-string ctor is called" << std::endl;
     m_strLen = 0;
     while (other != nullptr && *other != '\0')
     {
@@ -36,7 +37,7 @@ StringCls::StringCls(size_t length)
 // copy constructor
 StringCls::StringCls(const StringCls &other)
 {
-    std::cout<< "copy ctor called"<< std::endl;
+    std::cout<< "copy ctor is called"<< std::endl;
     if (other.m_strLen != this->m_strLen)
     {
         // reset this
@@ -51,16 +52,6 @@ StringCls::StringCls(const StringCls &other)
     this->m_strLen = other.m_strLen;
 }
 
-// move constructor
-StringCls::StringCls(StringCls &&other) noexcept
-{
-    std::cout<< "move ctor called"<< std::endl;
-    this->m_str = other.m_str;
-    this->m_strLen = other.m_strLen;
-    other.m_str = nullptr;
-    other.m_strLen = 0;
-}
-
 // assignment operator
 StringCls& StringCls::operator=(const StringCls& other)
 {
@@ -72,11 +63,37 @@ StringCls& StringCls::operator=(const StringCls& other)
     return *this;
 }
 
+// move constructor
+StringCls::StringCls(StringCls &&other) noexcept : m_str(nullptr), m_strLen(0)
+{
+    std::cout<< "move ctor is called"<< std::endl;
+    
+    // std move turns other to rvalue
+    // therefore; move assignment operator will be called in this line
+    *this = std::move(other);
+}
+
 // move assignment operator
 StringCls& StringCls::operator=(StringCls&& other)
 {
     std::cout<<"move assignment operator is called"<< std::endl;
-    //TODO
+    if(this != &other)
+    {
+        // free before moving
+        delete[] this->m_str;
+        this->m_strLen = 0;
+
+        // copy pointer of other data
+        this->m_str = other.m_str;
+        this->m_strLen = other.m_strLen;
+
+        // release other data
+        other.m_str = nullptr;
+        other.m_strLen = 0;
+
+    }
+    // Else: do not move object to itself, possible loss of data due to data free operation
+
     return *this;
 }
 
