@@ -45,20 +45,22 @@ StringCls::StringCls(const StringCls &other)
         this->m_str = new char[other.m_strLen];
     }
 
-    for (size_t i = 0; i < other.m_strLen; ++i)
-    {
-        this->m_str[i] = other.m_str[i];
-    }
     this->m_strLen = other.m_strLen;
+    strncpy(this->m_str, other.m_str, this->m_strLen);
 }
 
-// assignment operator
+// copy assignment operator
 StringCls& StringCls::operator=(const StringCls& other)
 {
     std::cout<<"assignment operator is called"<< std::endl;
-    // to get rid of constant value
-    StringCls temp(other);
-    StringCls::swap(*this, temp);
+    if(this != &other)
+    {
+        delete[] this->m_str;
+        this->m_str = new char[other.m_strLen];
+        this->m_strLen = other.m_strLen;
+        strncpy(this->m_str, other.m_str, this->m_strLen);
+    }
+    // Else: same address, prevent self assignmet
 
     return *this;
 }

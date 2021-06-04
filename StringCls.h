@@ -2,6 +2,7 @@
 #define STRING_CLS_H
 
 #include <iostream>
+#include <string.h>
 
 class StringCls
 {
