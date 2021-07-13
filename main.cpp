@@ -31,7 +31,13 @@ int main()
     StringCls s3 = s1;
     std::cout << s3 << std::endl;
 
-
+    // comparison
+    std::cout << "\n\t#comparison example" << std::endl;
+    StringCls s4("comparable text");
+    StringCls s5("comparable text");
+    cmp_res = s4.compare(s5);
+    if(cmp_res == 0)
+        std::cout << "s4 and s5 strings are equal."<< std::endl;
 
     std::cin.get();
 }

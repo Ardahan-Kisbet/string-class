@@ -30,7 +30,7 @@ StringCls::StringCls(const char *other)
 StringCls::StringCls(size_t length)
 {
     this->m_str = new char[length + 1] {};
-    this->m_strLen = length + 1;
+    this->m_strLen = length;
     this->m_str[length] = '\0';
 }
 
@@ -42,7 +42,9 @@ StringCls::StringCls(const StringCls &other)
     {
         // reset this
         delete[] this->m_str;
-        this->m_str = new char[other.m_strLen];
+        this->m_str = nullptr;
+        this->m_str = new char[other.m_strLen + 1];
+        this->m_str[other.m_strLen] = '\0';
     }
 
     this->m_strLen = other.m_strLen;
@@ -56,7 +58,9 @@ StringCls& StringCls::operator=(const StringCls& other)
     if(this != &other)
     {
         delete[] this->m_str;
-        this->m_str = new char[other.m_strLen];
+        this->m_str = nullptr;
+        this->m_str = new char[other.m_strLen + 1];
+        this->m_str[other.m_strLen] = '\0';
         this->m_strLen = other.m_strLen;
         strncpy(this->m_str, other.m_str, this->m_strLen);
     }
@@ -133,11 +137,20 @@ bool StringCls::operator==(const StringCls &other)
 int StringCls::compare(const StringCls& other)
 {
     int res;
-
-    // TODO
-
+    char * s1, *s2;
+    s1 = m_str;
+    s2 = other.m_str;
     // three way output = , < , >
-    return res;
+    while (*s1 != '\0' && *s1 == *s2)
+    {
+        ++s1;
+        ++s2;
+    }
+    
+    if(*s1 == *s2)
+        return 0;
+
+    return *s1 < *s2 ? -1 : 1;
 }
 
 // substring method
