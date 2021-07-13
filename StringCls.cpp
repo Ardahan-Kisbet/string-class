@@ -163,5 +163,4 @@ StringCls StringCls::substr(size_t pos, size_t len)
 void StringCls::swap(StringCls& lhs, StringCls& rhs)
 {
     // TODO
-    //
 }
