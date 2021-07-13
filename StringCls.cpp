@@ -103,12 +103,6 @@ StringCls& StringCls::operator=(StringCls&& other)
     return *this;
 }
 
-// swap two strings
-void StringCls::swap(StringCls& lhs, StringCls& rhs)
-{
-    // TODO
-}
-
 // output stream operator
 std::ostream &operator<<(std::ostream &output, const StringCls &other)
 {
@@ -163,4 +157,10 @@ StringCls StringCls::substr(size_t pos, size_t len)
     }
 
     return temp;
+}
+
+// swap two strings
+void StringCls::swap(StringCls& lhs, StringCls& rhs)
+{
+    // TODO
 }
